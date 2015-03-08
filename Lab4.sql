@@ -24,3 +24,11 @@ where city = 'Kyoto'))
 Order by pid Asc;
 
 --Question 3
+----Get the cids and names of 
+--customers who did not 
+--place an order through agent a03
+
+select cid, name from customers
+where cid not in 
+(select distinct cid from orders
+where aid = 'a03');
