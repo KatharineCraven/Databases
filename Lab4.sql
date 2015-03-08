@@ -50,9 +50,21 @@ where pid = 'p07');
 --not ordered by any 
 --customers who placed any orders through agent a05
 
-select pid from products 
+select distinct pid from products 
 where pid not in (
 select distinct pid from orders
 where cid in
 (select distinct cid from orders 
 where aid = 'a05'));
+
+--Question 6
+--Get the names, discounts, and city for all customers
+--who place orders through
+--agents in dallas or new york
+
+select name, discount, city from customers
+where cid in 
+(select distinct cid from orders
+where aid in 
+(select aid from agents 
+where city = 'Dallas' or city = 'New York'));
