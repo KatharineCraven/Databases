@@ -15,3 +15,11 @@ where cid = 'c006';
 
 (select aid, pid, city from orders inner join customers
 on (orders.cid = customers.cid));
+
+--NOT FINISHED :(((((((((
+
+--Question 3
+--Show the names of customers who have never placed an order
+select name from customers
+where cid not in
+(select distinct cid from orders);
