@@ -68,3 +68,14 @@ where cid in
 where aid in 
 (select aid from agents 
 where city = 'Dallas' or city = 'New York'));
+
+--Question 7
+--get all customers who have the same discount as that of 
+--any customers in Dallas or London
+
+select * from customers
+where discount in ( 
+select distinct discount from customers
+where cid in(
+select distinct cid from customers 
+where city = 'Dallas' or city = 'London'));
