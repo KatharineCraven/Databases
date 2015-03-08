@@ -20,6 +20,17 @@ on (orders.cid = customers.cid));
 
 --Question 3
 --Show the names of customers who have never placed an order
+--use a subquery
 select name from customers
 where cid not in
 (select distinct cid from orders);
+
+--Question 4
+--Show the names of customers who have never placed an order.
+--use an outer join
+
+select name from customers
+where name not in(
+select distinct name from customers
+right outer join orders
+on (customers.cid = orders.cid));
