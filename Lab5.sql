@@ -12,6 +12,7 @@ where cid = 'c006';
 --Question 2
 --Show the pids of products ordered through any agent who makes at least one order
 --for a customer in Kyoto, sorted by pid from highest to lowest 
+--no subqueries
 
 (select aid, pid, city from orders inner join customers
 on (orders.cid = customers.cid));
@@ -34,3 +35,13 @@ where name not in(
 select distinct name from customers
 right outer join orders
 on (customers.cid = orders.cid));
+
+--Question 5
+--Show the names of customers who placed at least one order through an agent in their
+--own city, along with those agents names
+
+select distinct customers.name, agents.name from customers inner join orders
+on customers.cid = orders.cid
+inner join agents
+on orders.aid = agents.aid
+where agents.city = customers.city;
