@@ -44,3 +44,15 @@ where pid = 'p01')
 and cid in
 (select cid from orders
 where pid = 'p07');
+
+--Question 5
+--get the pids of products 
+--not ordered by any 
+--customers who placed any orders through agent a05
+
+select pid from products 
+where pid not in (
+select distinct pid from orders
+where cid in
+(select distinct cid from orders 
+where aid = 'a05'));
