@@ -1,1 +1,0 @@
-﻿select ordno, dollars from orders;

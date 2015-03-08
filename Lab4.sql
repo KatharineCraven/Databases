@@ -79,3 +79,10 @@ select distinct discount from customers
 where cid in(
 select distinct cid from customers 
 where city = 'Dallas' or city = 'London'));
+
+--Question 8
+--A check constraint lets you specify that a value in a column satisfies a condition. 
+--They are good for making sure you only get certain values within a range.
+--The advantage of this is the database helps check that you put in good values for data.
+--A good check constraint would be having age >= 0. This is good because now you cannot put in a negative age number for a person, which is impossible.
+--A bad check constraint would be having age >= -5. This is bad because you could allow for negative numbers.
