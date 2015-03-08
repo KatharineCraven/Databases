@@ -45,3 +45,11 @@ on customers.cid = orders.cid
 inner join agents
 on orders.aid = agents.aid
 where agents.city = customers.city;
+
+--Question 6
+--Show the names of customers and agents living in the same city, along with the name
+--of the shared city, regardless of whether or not the customer has ever placed an
+--order with that agent
+
+select distinct customers.name, agents.name, customers.city, agents.city from customers inner join agents
+on customers.city = agents.city;
