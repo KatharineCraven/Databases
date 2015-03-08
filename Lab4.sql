@@ -32,3 +32,15 @@ select cid, name from customers
 where cid not in 
 (select distinct cid from orders
 where aid = 'a03');
+
+--Question 4
+--Get the cids of 
+--customers who ordered both product p01 and p07
+
+select distinct cid from customers
+where cid in
+(select distinct cid from orders
+where pid = 'p01')
+and cid in
+(select cid from orders
+where pid = 'p07');
