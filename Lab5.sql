@@ -14,10 +14,14 @@ where cid = 'c006';
 --for a customer in Kyoto, sorted by pid from highest to lowest 
 --no subqueries
 
+--Not finished. Here is my thinking:
+--Ive managed to get the 3 columns of information I need.
+--I can get agents(aids) who work in Kyoto from this table.
+--I can get pids with corresponding aids to those who work in kyoto
+--I am not sure how to tie this together without subqueries.
+
 (select aid, pid, city from orders inner join customers
 on (orders.cid = customers.cid));
-
---NOT FINISHED :(((((((((
 
 --Question 3
 --Show the names of customers who have never placed an order
@@ -53,3 +57,18 @@ where agents.city = customers.city;
 
 select distinct customers.name, agents.name, customers.city, agents.city from customers inner join agents
 on customers.city = agents.city;
+
+--Question 7
+--Show the name and city of customers who live in the city that makes
+--the fewest different kinds of products
+
+--I cannnot figure out how to get the fewest different kinds of products. 
+--If I were programming normally, I could loop through and sum the number of occurances a city has
+--and compare it to a max, but I do not know how to do this in sql
+
+--I have hardcoded in the city that makes the fewest different kinds of products (Duluth) 
+--to demonstrate what I would do once I had that part of the problem done
+
+select distinct customers.name, customers.city from customers inner join products
+on (customers.city = products.city)
+where products.city = 'Duluth';
