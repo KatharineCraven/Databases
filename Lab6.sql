@@ -54,3 +54,19 @@ group by cid
 ) summy
 on customers.cid = summy.cid
 
+
+--Question 5 
+--Display the names of all customers who brought products
+--from agents based in Tokyo
+--along with the names of the products they ordered
+--and the names of the agents who sold it to them
+
+select cota.customername, products.name, cota.name from products inner join(
+select (customers.name) customername, ota.pid, ota.name from customers inner join(
+select orders.cid, orders.pid, tokyoagents.aid, tokyoagents.name from orders inner join (
+select aid, name from agents
+where agents.city = 'Tokyo') tokyoagents
+on orders.aid = tokyoagents.aid) ota
+on ota.cid = customers.cid) cota
+on cota.pid = products.pid;
+
