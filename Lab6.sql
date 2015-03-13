@@ -70,3 +70,21 @@ on orders.aid = tokyoagents.aid) ota
 on ota.cid = customers.cid) cota
 on cota.pid = products.pid;
 
+--Question 6
+--Write a query to check the accuracy of the dollars column in the
+--Orders table. This means calculating Orders.dollars from data in other tables and
+--comparing those values to the values in Orders.dollars. Display all rows in orders
+--where orders.dollars is incorrect, if any
+
+--get price usd from products, multiply by qty in orders
+
+select orders.ordno, mon, cid, aid, pid, qty, dollars
+from orders left outer join (
+select ordpro.ordno, (ordpro.qty*ordpro.priceUSD)checker
+from (
+select orders.ordno, orders.pid, orders.qty, orders.dollars, pro.priceUSD
+from orders inner join(
+select products.pid, products.priceUSD from products) pro
+on pro.pid = orders.pid) ordpro) chkr
+on chkr.ordno = orders.ordno
+where chkr.checker != orders.dollars
