@@ -88,3 +88,52 @@ select products.pid, products.priceUSD from products) pro
 on pro.pid = orders.pid) ordpro) chkr
 on chkr.ordno = orders.ordno
 where chkr.checker != orders.dollars
+
+--What's the difference between a LEFT OUTER JOIN and a RIGHT OUTER JOIN? Give example queries in sql to demonstrate.
+
+--In a left outer join, the rows that will all be retained are from the table specified to the left of the “join” keyword.
+--In a right outer join, the row that will be retained are from the table specified to the right of the “join” keyword.
+--For example consider the following code:
+
+--select customers.cid, orders.ordno from customers right outer join orders
+--on customers.cid = orders.cid
+
+--We get the following table: 
+--"c001";1011
+--"c002";1013
+--"c003";1015
+--"c006";1016
+--"c001";1017
+--"c001";1018
+--"c001";1019
+--"c006";1020
+--"c004";1021
+--"c001";1022
+--"c001";1023
+--"c006";1024
+--"c001";1025
+--"c002";1026
+
+--conversely, if we put this code:
+
+--select customers.cid, orders.ordno from customers left outer join orders
+--on customers.cid = orders.cid
+
+--We get this table: 
+--"c001";1011
+--"c002";1013
+--"c003";1015
+--"c006";1016
+--"c001";1017
+--"c001";1018
+--"c001";1019
+--"c006";1020
+--"c004";1021
+--"c001";1022
+--"c001";1023
+--"c006";1024
+--"c001";1025
+--"c002";1026
+--"c005";
+
+--Even though c005 has no ordno associated with it, it is not dropped from the table here.
