@@ -59,13 +59,13 @@ on customers.city = agents.city;
 --Show the name and city of customers who live in the city that makes
 --the fewest different kinds of products
 
---I cannnot figure out how to get the fewest different kinds of products. 
---If I were programming normally, I could loop through and sum the number of occurances a city has
---and compare it to a max, but I do not know how to do this in sql
-
---I have hardcoded in the city that makes the fewest different kinds of products (Duluth) 
---to demonstrate what I would do once I had that part of the problem done
-
-select distinct customers.name, customers.city from customers inner join products
-on (customers.city = products.city)
-where products.city = 'Duluth';
+select customers.name, customers.city from customers inner join (
+select* from(
+      select products.city,
+      count(products.pid)
+      from products
+      group by products.city
+      order by count(products.pid) asc
+      limit 1) minny
+) fewestcity
+on customers.city = fewestcity.city
