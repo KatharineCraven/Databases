@@ -14,14 +14,11 @@ where cid = 'c006';
 --for a customer in Kyoto, sorted by pid from highest to lowest 
 --no subqueries
 
---Not finished. Here is my thinking:
---Ive managed to get the 3 columns of information I need.
---I can get agents(aids) who work in Kyoto from this table.
---I can get pids with corresponding aids to those who work in kyoto
---I am not sure how to tie this together without subqueries.
-
-(select aid, pid, city from orders inner join customers
-on (orders.cid = customers.cid));
+select distinct orders.pid from orders, (select aid, pid, city from orders inner join customers
+on (orders.cid = customers.cid)
+where customers.city = 'Kyoto') sub1
+where orders.aid = sub1.aid
+order by pid desc;
 
 --Question 3
 --Show the names of customers who have never placed an order
