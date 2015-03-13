@@ -29,4 +29,14 @@ on customers.city = maxcity.city;
 --in alphabetical order
 
 select name from products 
-where priceUSD < (Select avg(priceUSD) from products);
+where priceUSD < (Select avg(priceUSD) from products)
+order by name asc;
+
+--Question 3
+--Display the customer name, pid, order id, and the dollars for all orders
+--sorted by dollas from high to low
+
+select customers.name, orders.pid, orders.ordno, orders.dollars
+from customers inner join orders
+on customers.cid = orders.cid
+order by dollars desc;
