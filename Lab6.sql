@@ -40,3 +40,17 @@ select customers.name, orders.pid, orders.ordno, orders.dollars
 from customers inner join orders
 on customers.cid = orders.cid
 order by dollars desc;
+
+--Question 4
+--Display all customers names in reverse alphabetical order
+--and their total ordered
+--nothing more
+--use coalesce
+
+select customers.name, coalesce(sum, 0) from customers left outer join (
+select cid, sum(dollars)
+from orders
+group by cid
+) summy
+on customers.cid = summy.cid
+
