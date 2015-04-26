@@ -13,9 +13,12 @@ declare
    resultset refcursor = 'prereqsforresult';
 begin
   open resultset for 
-     select prereqnum
-     from Prerequisites
-       where coursenum = course_Num;
+     select Courses.name
+     from Courses inner join
+       ( select prereqnum
+         from Prerequisites
+         where coursenum = course_Num) prerq
+     on prerq.prereqnum = Courses.num;
   return resultset;
 end;
 $$
@@ -24,8 +27,12 @@ language plpgsql;
 select PreReqsFor(308);
 Fetch all from prereqsforresult;
 
+close prereqsforresult;
+
 select PreReqsFor(499);
 Fetch all from prereqsforresult;
+
+close prereqsforresult;
 
 select PreReqsFor(221);
 Fetch all from prereqsforresult;
