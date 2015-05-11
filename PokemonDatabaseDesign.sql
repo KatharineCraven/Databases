@@ -31,12 +31,11 @@ CREATE TABLE pokedex(
 );
 
 CREATE TABLE evolutions(
-   pkmnName     text  NOT NULL,
-   evolveName   text  NOT NULL,
+   pkmnName     text  NOT NULL UNIQUE,
+   evolvesFrom  text,
    requirements text,
-   primary key(evolveName),
-   foreign key(pkmnName) references pokedex(pkmnName),
-   foreign key(evolveName) references pokedex(pkmnName)
+   primary key(pkmnName),
+   foreign key(pkmnName) references pokedex(pkmnName)
 );
 
 CREATE TABLE elementTypes(
@@ -215,43 +214,43 @@ INSERT INTO Pokedex( pkmnName, dexHeightMeters, dexWeightKg, description)
   VALUES ('Leafeon', 1.0, 25.5, 'Just like a plant, it uses photosynthesis. As a result, it is always enveloped in clean air.');
   
 INSERT INTO Pokedex( pkmnName, dexHeightMeters, dexWeightKg, description)
-  VALUES ('Rattata', 0.3, 3.5, '');
+  VALUES ('Rattata', 0.3, 3.5, 'This Pokémons impressive vitality allows it to live anywhere. It also multiplies very quickly.');
 --Select * from pokedex;
 
 
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Bulbasaur', 'Ivysaur', 'Level 16');
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Ivysaur', 'Venusaur', 'Level 32');
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Charmander', 'Charmeleon', 'Level 16');
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Charmeleon', 'Charizard', 'Level 32');
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Squirtle', 'Wartortle', 'Level 16');
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Wartortle', 'Blastoise', 'Level 32');
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Pichu', 'Pikachu', 'Friendship');
 
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Pikachu', 'Raichu', 'Thunder Stone');
 
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Eevee', 'Vaporeon', 'Water Stone');
   
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Eevee', 'Espeon', 'Friendship (Day)');
 
-INSERT INTO Evolutions(pkmnName, evolveName, requirements)
+INSERT INTO Evolutions(evolvesFrom, pkmnName, requirements)
   Values('Eevee', 'Leafeon', 'Level up near Moss Rock');
 
 --Select * from Evolutions;
